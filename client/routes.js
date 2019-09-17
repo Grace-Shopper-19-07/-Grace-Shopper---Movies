@@ -45,6 +45,11 @@ class Routes extends Component {
             <Route path="/movies" component={AllMovies} />
             <Route path="/contact" component={Contact} />
             <Route path="/about" component={About} />
+            <Route
+              exact
+              path="/movies/:id"
+              render={props => <singleMovie {...props} />}
+            />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
