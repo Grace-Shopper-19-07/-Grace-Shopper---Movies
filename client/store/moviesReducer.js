@@ -27,12 +27,14 @@ export const getMovies = () => {
 
 export const gotMovieById = id => {
   return async dispatch => {
-    const {data} = await axios.get(`/api/movie/${id}`)
+    console.log('made it here', id)
+    const {data} = await axios.get(`/api/movies/${id}`)
     dispatch(getOneMovie(data))
   }
 }
 
 export default function(state = initialState, action) {
+  console.log('ACTION', action)
   switch (action.type) {
     case GET_MOVIES:
       return {

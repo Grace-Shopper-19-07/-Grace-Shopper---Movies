@@ -7,18 +7,25 @@ class SingleMovie extends React.Component {
     this.props.getOneMovie(this.props.match.params.id)
   }
   render() {
-    return <h1>{this.props.oneMovie.name}</h1>
+    console.log('PROPS', this.props)
+    return (
+      <div>
+        <h1>{this.props.oneMovie.name}</h1>
+      </div>
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    movies: state.movies,
-    oneMovie: state.oneMovie
+    movies: state.movies.all,
+    oneMovie: state.movies.oneMovie
   }
 }
 const mapDispatchToProps = dispatch => ({
-  getOneMovie: id => dispatch(gotMovieById(id))
+  getOneMovie: id => {
+    dispatch(gotMovieById(id))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie)
