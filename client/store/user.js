@@ -65,6 +65,8 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    // case GET_MOVIES:
+    //   return action.movies
     default:
       return state
   }
