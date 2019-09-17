@@ -7,7 +7,7 @@ const ProductOrder = require('./productorder')
 Address.belongsToMany(User)
 User.belongsToMany(Address)
 
-User.hasOne(Order)
+User.hasMany(Order)
 Order.hasMany(User)
 
 Movie.belongsToMany(Order, {through: 'ProductOrder'})
