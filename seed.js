@@ -38,7 +38,7 @@ const movies = [
   },
   {
     name: 'The Shawshank Redemption',
-    genre: 'https://i.ytimg.com/vi/7cwUcdpUayQ/maxresdefault.jpg',
+    genre: 'Drama',
     year: 1994,
     price: 10.67,
     image:
