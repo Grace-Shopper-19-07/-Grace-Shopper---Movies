@@ -2,11 +2,14 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-    status: {
-        type: Sequelize.ENUM('PENDING, COMPLETED'),
-        allowNull: false,
-        defaultValue: 'PENDING'
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: 'PENDING',
+    validate: {
+      isIn: [['PENDING', 'COMPLETE']]
     }
+  }
 })
 
 module.exports = Order

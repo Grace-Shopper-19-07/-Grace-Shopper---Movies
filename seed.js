@@ -1,8 +1,6 @@
-const {db} = require('./server/db')
+const db = require('./server/db')
 const {green, red} = require('chalk')
-const Movie = require('./server/db/models/movie')
-const User = require('./server/db/models/user')
-const Order = require('./server/db/models/order')
+const {Movie, User, Order, ProductOrder} = require('./server/db/models')
 
 const movies = [
   {
@@ -43,7 +41,7 @@ const movies = [
     genre: 'https://i.ytimg.com/vi/7cwUcdpUayQ/maxresdefault.jpg',
     year: 1994,
     price: 10.67,
-    imageUrl:
+    image:
       'https://images-na.ssl-images-amazon.com/images/I/519NBNHX5BL._SY445_.jpg',
     description:
       "Andy Dufresne (Tim Robbins) is sentenced to two consecutive life terms in prison for the murders of his wife and her lover and is sentenced to a tough prison. However, only Andy knows he didn't commit the crimes. While there, he forms a friendship with Red (Morgan Freeman), experiences brutality of prison life, adapts, helps the warden, etc., all in 19 years.",
@@ -55,22 +53,22 @@ const users = [
   {
     username: 'ai',
     email: 'ai@gmail.com',
-    password: 123
+    password: '123'
   },
   {
     username: 'ethan',
     email: 'ethan@gmail.com',
-    password: 345
+    password: '345'
   },
   {
     username: 'jon',
     email: 'jon@gmail.com',
-    password: 567
+    password: '567'
   },
   {
     username: 'mike',
     email: 'mike@gmail.com',
-    password: 789
+    password: '789'
   }
 ]
 

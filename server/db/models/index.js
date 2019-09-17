@@ -1,14 +1,13 @@
 const User = require('./user')
-const Movie = require('./movie')
-const Address = require('./address')
-const Order = require('./order')
-const ProductOrder = require('./productorder')
+const Movie = require('./Movie')
+const Order = require('./Order')
+const ProductOrder = require('./ProductOrder')
 
-Address.belongsToMany(User)
-User.belongsToMany(Address)
+// Address.belongsToMany(User)
+// User.belongsToMany(Address)
 
 User.hasOne(Order)
-Order.hasMany(User)
+Order.belongsTo(User)
 
 Movie.belongsToMany(Order, {through: 'ProductOrder'})
 Order.belongsToMany(Movie, {through: 'ProductOrder'})
@@ -22,7 +21,6 @@ Order.belongsToMany(Movie, {through: 'ProductOrder'})
 module.exports = {
   User,
   Movie,
-  Address,
   Order,
   ProductOrder
 }
