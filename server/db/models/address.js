@@ -8,31 +8,31 @@ const Addresss = db.define('address', {
     },
     address2: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     city: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     state: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     zip: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     phone: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     type: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     },
     name: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
     }
 })
 
