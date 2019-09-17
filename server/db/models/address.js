@@ -22,16 +22,8 @@ const Addresss = db.define('address', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    phone: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     type: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    name: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM('SHIPPING, BILLING'),
         allowNull: false
     }
 })
