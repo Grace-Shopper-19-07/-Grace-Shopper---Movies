@@ -74,16 +74,20 @@ const users = [
 
 const orders = [
   {
-    status: 'PENDING'
+    status: 'PENDING',
+    userId: 1
   },
   {
-    status: 'COMPLETE'
+    status: 'COMPLETE',
+    userId: 2
   },
   {
-    status: 'COMPLETE'
+    status: 'COMPLETE',
+    userId: 3
   },
   {
-    status: 'PENDING'
+    status: 'PENDING',
+    userId: 4
   }
 ]
 
