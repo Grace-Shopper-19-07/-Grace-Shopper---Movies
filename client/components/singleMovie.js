@@ -1,10 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {gotMovieById} from '../store/moviesReducer'
+import {getMovie} from '../store/moviesReducer'
 
 class SingleMovie extends React.Component {
   componentDidMount() {
-    this.props.getOneMovie(this.props.match.params.id)
+    this.props.getMovie(this.props.match.params.id)
   }
   render() {
     console.log('PROPS', this.props)
@@ -23,8 +23,8 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => ({
-  getOneMovie: id => {
-    dispatch(gotMovieById(id))
+  getMovie: id => {
+    dispatch(getMovie(id))
   }
 })
 
