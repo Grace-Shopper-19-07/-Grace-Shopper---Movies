@@ -12,9 +12,6 @@ class AllMovies extends React.Component {
       <div>
         <h1>MOVIES</h1>
         <div className="filter">
-          <p>-------------------------</p>
-          <p>THIS IS A FILTER PART</p>
-          <p>Genre PlaceHolder</p>
           <label>
             <input name="genre" type="checkbox" />
             Action
@@ -23,17 +20,30 @@ class AllMovies extends React.Component {
             <input name="genre" type="checkbox" />
             Comedy
           </label>
-          <p>FILTER ENDS HERE</p>
-          <p>-------------------------</p>
+          <label>
+            <input name="genre" type="checkbox" />
+            Drama
+          </label>
+          <label>
+            <input name="genre" type="checkbox" />
+            Romantic
+          </label>
+          <label>
+            <input name="genre" type="checkbox" />
+            Marvel
+          </label>
         </div>
-        {this.props.movies.map((movie, idx) => (
-          <div key={idx}>
-            <Link className="movie" to={`/movies/${movie.id}`}>
-              {movie.name}
-            </Link>
-            <img src={movie.imageUrl} />
-          </div>
-        ))}
+        <div className="allmovies">
+          {this.props.movies.map((movie, idx) => (
+            <div key={idx}>
+              <img src={movie.image} />
+              <br />
+              <p className="movie">
+                <Link to={`/movies/${movie.id}`}>{movie.name}</Link>
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }
