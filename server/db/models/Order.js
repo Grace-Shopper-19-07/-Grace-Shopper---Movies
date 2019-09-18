@@ -9,6 +9,11 @@ const Order = db.define('order', {
     validate: {
       isIn: [['PENDING', 'COMPLETE']]
     }
+  },
+  price: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
   }
 })
 
