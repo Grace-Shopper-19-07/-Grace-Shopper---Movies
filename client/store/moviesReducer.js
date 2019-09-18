@@ -29,6 +29,7 @@ export const getMovie = id => {
   return async dispatch => {
     console.log('made it here', id)
     const {data} = await axios.get(`/api/movies/${id}`)
+    console.log('DATA', data)
     dispatch(gotMovie(data))
   }
 }
