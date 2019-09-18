@@ -19,6 +19,7 @@ const gotMovie = movie => ({
 })
 
 export const getMovies = () => {
+  // no try catches
   return async dispatch => {
     const {data} = await axios.get('/api/movies')
     dispatch(gotMovies(data))
