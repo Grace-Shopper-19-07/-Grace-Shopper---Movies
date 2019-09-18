@@ -7,10 +7,16 @@ class SingleMovie extends React.Component {
     this.props.getMovie(this.props.match.params.id)
   }
   render() {
-    console.log('PROPS', this.props)
+    const {name, image, description, genre, year, price} = this.props.oneMovie
     return (
       <div>
-        <h1>{this.props.oneMovie.name}</h1>
+        <h1>{name}</h1>
+        <img src={image} />
+        <p>{genre}</p>
+        <p>{year}</p>
+        <p>{description}</p>
+        <p>${price}</p>
+        <button>Add to Cart</button>
       </div>
     )
   }
