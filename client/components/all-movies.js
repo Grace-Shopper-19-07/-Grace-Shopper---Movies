@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getMovies} from '../store/moviesReducer'
+import {Link} from 'react-router-dom'
 
 class AllMovies extends React.Component {
   componentDidMount() {
