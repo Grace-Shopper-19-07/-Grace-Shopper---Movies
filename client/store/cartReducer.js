@@ -22,21 +22,24 @@ const UPDATE_CART = 'UPDATE_CART'
 const gotUpdatedCart = cart => {
   return {
     type: UPDATE_CART,
-    cart
+    quantity
   }
 }
 
 export const updateCartThunk = updatedQuantity => {
   return async dispatch => {
     const {data} = await axios.put('/api/cart', updatedQuantity)
-    dispatch(gotUpdatedCart(data))
+    dispatch(gotUpdatedCart(updatedQuantity))
   }
 }
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case UPDATE_CART:
-      return {...state, userCart: action.cart}
+      return {
+        ...state,
+        userCart: {...state.userCart, quantity: action.quantity}
+      }
     case GET_LOGGED_IN_SHOPPING_CART:
       return {...state, userCart: action.cart}
     default:
