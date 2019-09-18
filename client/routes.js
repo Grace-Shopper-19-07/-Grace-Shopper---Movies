@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, BrowserRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
@@ -9,7 +9,7 @@ import {
   Contact,
   About,
   AllMovies,
-  singleMovie
+  SingleMovie
 } from './components'
 import {me} from './store'
 
@@ -27,29 +27,20 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/about" component={About} />
-        <Route path="/movies" component={AllMovies} />
-        <Route
-          exact
-          path="/movies/:id"
-          render={props => <singleMovie {...props} />}
-        />
-
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/contact" component={Contact} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/movies" component={AllMovies} />
+        <Route exact path="/movies/:id" component={SingleMovie} />}/>
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-            <Route path="/movies" component={AllMovies} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/about" component={About} />
-            <Route
-              exact
-              path="/movies/:id"
-              render={props => <singleMovie {...props} />}
-            />
+            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/movies" component={AllMovies} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/movies/:id" component={SingleMovie} />}/>
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

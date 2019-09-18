@@ -38,7 +38,7 @@ const movies = [
   },
   {
     name: 'The Shawshank Redemption',
-    genre: 'https://i.ytimg.com/vi/7cwUcdpUayQ/maxresdefault.jpg',
+    genre: 'Drama',
     year: 1994,
     price: 10.67,
     image:
@@ -74,16 +74,20 @@ const users = [
 
 const orders = [
   {
-    status: 'PENDING'
+    status: 'PENDING',
+    userId: 1
   },
   {
-    status: 'COMPLETE'
+    status: 'COMPLETE',
+    userId: 2
   },
   {
-    status: 'COMPLETE'
+    status: 'COMPLETE',
+    userId: 3
   },
   {
-    status: 'PENDING'
+    status: 'PENDING',
+    userId: 4
   }
 ]
 
