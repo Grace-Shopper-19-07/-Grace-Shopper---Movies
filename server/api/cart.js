@@ -16,9 +16,8 @@ router.get('/:userId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const {movieId, orderId, quantity} = req.body
-    res
-      .status(201)
-      .json(await ProductOrder.create({quantity, movieId, orderId}))
+    const data = await ProductOrder.create({quantity, movieId, orderId})
+    res.status(201).json(data)
   } catch (err) {
     next(err)
   }
