@@ -15,7 +15,7 @@ class SingleMovie extends React.Component {
         <p>{genre}</p>
         <p>{year}</p>
         <p>{description}</p>
-        <p>${price}</p>
+        <p>${price / 100}</p>
         <button>Add to Cart</button>
       </div>
     )
