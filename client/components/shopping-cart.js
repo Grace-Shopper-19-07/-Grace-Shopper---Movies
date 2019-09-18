@@ -3,46 +3,45 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {getUserCartById, updateCartThunk} from '../store/cartReducer'
 
-const ShoppingCart = ({checkout, isEmpty}) => (
-  <div className="cart">
-    <h1>Shopping Cart</h1>
-    {/* {isEmpty ? ( */}
-    <div>
-      <p>Your cart is empty</p>
-      {/* <a href="#" onClick={checkout}> */}
-      <button>Back to Shopping</button>
-    </div>
-    {/* ) : ( */}
-    {/* <div> */}
-    {/* <input type="text" className="input" placeholder="Search..." />
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/shopping-cart">Shopping Cart</Link> */}
-    {/* <Link to="/menu">Menu</Link> */}
-    {/* </div> */}
-    {/* )} */}
-  </div>
-)
+class ShoppingCart extends React.Component {
+  componentDidMount() {
+    this.props.renderCart(this.props.user.id)
+  }
+
+  render() {
+    console.log(this.props)
+    return (
+      <div className="cart">
+        <div>
+          <p>Your cart is empty</p>
+          <button>Back to Shopping</button>
+        </div>
+      </div>
+    )
+  }
+}
 
 /**
  * CONTAINER
  */
-// const mapState = state => {
-//   return {
-//     isEmpty: !state.cart...
-//   }
-// }
+const mapState = state => {
+  return {
+    user: state.user,
+    cart: state.cart.userCart
+  }
+}
 
-// const mapDispatch = dispatch => {
-//   return {
-//     handleClick() {
-//       dispatch(checkout())
-//     }
-//   }
-// }
+const mapDispatch = dispatch => {
+  return {
+    renderCart: id => {
+      dispatch(getUserCartById(id))
+    }
+  }
+}
 
-// export default connect(mapState, mapDispatch)(ShoppingCart)
+export default connect(mapState, mapDispatch)(ShoppingCart)
 
 /**
  * PROP TYPES
@@ -51,5 +50,3 @@ const ShoppingCart = ({checkout, isEmpty}) => (
 //   handleClick: PropTypes.func.isRequired,
 //   isLoggedIn: PropTypes.bool.isRequired
 // }
-
-export default ShoppingCart

@@ -19,7 +19,7 @@ export const getUserCartById = id => {
   }
 }
 const UPDATE_CART = 'UPDATE_CART'
-const gotUpdatedCart = cart => {
+const gotUpdatedCart = quantity => {
   return {
     type: UPDATE_CART,
     quantity
