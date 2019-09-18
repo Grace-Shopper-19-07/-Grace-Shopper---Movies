@@ -4,8 +4,9 @@ import Routes from './routes'
 
 const App = () => {
   return (
-    <div className="flexContainer col">
+    <div>
       <Navbar />
+      <Filter />
       <Routes />
       <Footer />
     </div>

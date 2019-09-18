@@ -7,7 +7,7 @@ router.get('/:userId', async (req, res, next) => {
       where: {userId: req.params.userId, status: 'PENDING'},
       include: {model: Movie}
     })
-    res.send(items)
+    res.json(items)
   } catch (err) {
     next(err)
   }
