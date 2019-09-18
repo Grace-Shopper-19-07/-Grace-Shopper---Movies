@@ -10,6 +10,9 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+    validate: {
+      isEmail: true
+    },
     // Making `.password` act like a func hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
