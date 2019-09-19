@@ -32,7 +32,7 @@ class ShoppingCart extends React.Component {
               <div key={idx}>
                 <img src={movie.image} />
                 <p>{movie.name}</p>
-                <p>${movie.price}</p>
+                <p>${movie.price / 100}</p>
               </div>
             ))}
             <button>Back to Shopping</button>
