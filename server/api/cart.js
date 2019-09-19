@@ -3,11 +3,12 @@ const {ProductOrder, User, Order, Movie} = require('../db/models')
 
 router.get('/:userId', async (req, res, next) => {
   try {
-    const items = await Order.findOrCreate({
+    const [order, wasCreated] = await Order.findOrCreate({
       where: {userId: req.params.userId, status: 'PENDING'},
       include: {model: Movie}
     })
-    res.json(items)
+    console.log('items', order)
+    res.json(order)
   } catch (err) {
     next(err)
   }
