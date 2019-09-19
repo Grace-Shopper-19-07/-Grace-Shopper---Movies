@@ -1,5 +1,5 @@
 const db = require('./server/db')
-const {green, red} = require('chalk')
+// const {green, red} = require('chalk')
 const {Movie, User, Order, ProductOrder} = require('./server/db/models')
 
 const movies = [
@@ -137,10 +137,10 @@ const seed = async () => {
         return ProductOrder.create(order)
       })
     )
-    console.log(green('Seeding success!'))
+    console.log('Seeding success!')
     db.close()
   } catch (err) {
-    console.error(red('Oh no! Something went wrong!'))
+    console.error('Oh no! Something went wrong!')
     console.error(err)
     db.close()
   }

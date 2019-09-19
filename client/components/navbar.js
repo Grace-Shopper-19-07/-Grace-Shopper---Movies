@@ -7,7 +7,7 @@ import {deleteCart, getUserCartById} from '../store/cartReducer'
 
 const Navbar = ({handleClick, isLoggedIn, id}) => (
   <div className="navbar">
-    <h1>LOGO</h1>
+    <h1>BUBBLE BEE MOVIES</h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -24,12 +24,7 @@ const Navbar = ({handleClick, isLoggedIn, id}) => (
         <div>
           {/* The navbar will show these links before you log in */}
           <input type="text" className="input" placeholder="Search..." />
-          <Link
-            to="/login"
-            onClick={() => this.props.handleLogin(this.props.id)}
-          >
-            Login
-          </Link>
+          <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/cart">Shopping Cart</Link>
           <Link to="/movies"> Movies </Link>
