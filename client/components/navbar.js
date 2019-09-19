@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {deleteCart} from '../store/cartReducer'
+import {deleteCart, getUserCartById} from '../store/cartReducer'
+
 const Navbar = ({handleClick, isLoggedIn, id}) => (
   <div className="navbar">
     <h1>LOGO</h1>
@@ -23,7 +24,12 @@ const Navbar = ({handleClick, isLoggedIn, id}) => (
         <div>
           {/* The navbar will show these links before you log in */}
           <input type="text" className="input" placeholder="Search..." />
-          <Link to="/login">Login</Link>
+          <Link
+            to="/login"
+            onClick={() => this.props.handleLogin(this.props.id)}
+          >
+            Login
+          </Link>
           <Link to="/signup">Sign Up</Link>
           <Link to="/cart">Shopping Cart</Link>
           <Link to="/movies"> Movies </Link>
@@ -41,7 +47,8 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     id: state.user.id,
-    cart: state.cart.userCart
+    cart: state.cart.userCart,
+    user: state.user
   }
 }
 
@@ -50,6 +57,9 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(deleteCart())
       dispatch(logout())
+    },
+    handleLogin: id => {
+      dispatch(getUserCartById(id))
     }
   }
 }
