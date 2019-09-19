@@ -7,7 +7,6 @@ router.get('/:userId', async (req, res, next) => {
       where: {userId: req.params.userId, status: 'PENDING'},
       include: {model: Movie}
     })
-    console.log('items', order)
     res.json(order)
   } catch (err) {
     next(err)
