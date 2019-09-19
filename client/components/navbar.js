@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-
-const Navbar = ({handleClick, isLoggedIn}) => (
+import {deleteCart} from '../store/cartReducer'
+const Navbar = ({handleClick, isLoggedIn, id}) => (
   <div className="navbar">
     <h1>LOGO</h1>
     <nav>
@@ -12,11 +12,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <input type="text" className="input" placeholder="Search..." />
-          <Link to="/shopping-cart">Shopping Cart</Link>
+          <Link to={`/cart/${id}`}>Shopping Cart</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
           <Link to="/home">Profile</Link>
+          <Link to="/movies"> Movies </Link>
         </div>
       ) : (
         <div>
@@ -24,7 +25,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <input type="text" className="input" placeholder="Search..." />
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
-          <Link to="/shopping-cart">Shopping Cart</Link>
+          <Link to="/cart">Shopping Cart</Link>
+          <Link to="/movies"> Movies </Link>
           {/* <Link to="/menu">Menu</Link> */}
         </div>
       )}
@@ -37,13 +39,16 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    id: state.user.id,
+    cart: state.cart.userCart
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     handleClick() {
+      dispatch(deleteCart())
       dispatch(logout())
     }
   }

@@ -24,17 +24,19 @@ router.post('/', async (req, res, next) => {
 })
 
 router.put('/', async (req, res, next) => {
-  // Error: order.updateAttirbutes is not a function --- WHY!!??
   try {
-    await ProductOrder.findOne({
-      where: {movieId: req.body.movieId, orderId: req.body.orderId}
-    })
-      .then(order =>
-        order.updateAttributes({
-          quantity: req.body.quantity
-        })
-      )
-      .then(order => res.json(order))
+    await ProductOrder.update(
+      {
+        quantity: req.body.quantity
+      },
+      {
+        where: {
+          movieId: req.body.movieId,
+          orderId: req.body.orderId
+        }
+      }
+    )
+    res.status(204).end()
   } catch (err) {
     next(err)
   }
@@ -45,7 +47,7 @@ router.delete('/', async (req, res, next) => {
     await ProductOrder.destroy({
       where: {orderId: req.body.orderId, movieId: req.body.movieId}
     })
-    res.status(204).end()
+    res.status(202).end()
   } catch (err) {
     next(err)
   }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {withRouter, Route, Switch, BrowserRouter} from 'react-router-dom'
+import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
   Login,
@@ -9,7 +9,8 @@ import {
   Contact,
   About,
   AllMovies,
-  SingleMovie
+  SingleMovie,
+  ShoppingCart
 } from './components'
 import {me} from './store'
 
@@ -22,7 +23,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn, userId} = this.props
 
     return (
       <Switch>
@@ -32,19 +33,17 @@ class Routes extends Component {
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/about" component={About} />
         <Route exact path="/movies" component={AllMovies} />
-        <Route exact path="/movies/:id" component={SingleMovie} />}/>
+        <Route exact path="/movies/:id" component={SingleMovie} />
+        <Route exact path="/cart" component={ShoppingCart} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
+            <Route exact path={`/cart/${userId}`} component={ShoppingCart} />
             <Route exact path="/home" component={UserHome} />
-            <Route exact path="/movies" component={AllMovies} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/movies/:id" component={SingleMovie} />}/>
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        {/* <Route component={Login} /> */}
+        <Route component={AllMovies} />
       </Switch>
     )
   }
@@ -57,7 +56,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    userId: state.user.id
   }
 }
 
