@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const initialState = {
-  userCart: {}
+  userCart: {id: 0}
 }
 
 const GET_LOGGED_IN_SHOPPING_CART = 'GET_LOGGED_IN_SHOPPING_CART'
@@ -13,8 +13,9 @@ const gotLoggedInUserCart = cart => {
 }
 
 export const getUserCartById = id => {
+  console.log('ID from CartReducer', id)
   return async dispatch => {
-    const {data} = await axios.get('/api/cart', id)
+    const {data} = await axios.get('/api/cart/' + id)
     dispatch(gotLoggedInUserCart(data))
   }
 }
@@ -33,14 +34,32 @@ export const updateCartThunk = updatedQuantity => {
   }
 }
 
+const DELETE_CART = 'DELETE_CART'
+const deletedCart = () => {
+  return {
+    type: DELETE_CART
+  }
+}
+
+export const deleteCart = () => {
+  return dispatch => {
+    dispatch(deletedCart())
+  }
+}
+
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
+    case DELETE_CART:
+      return {...state, userCart: {}}
     case UPDATE_CART:
       return {
         ...state,
         userCart: {...state.userCart, quantity: action.quantity}
       }
     case GET_LOGGED_IN_SHOPPING_CART:
+      if (action.cart === null) {
+        return {...state}
+      }
       return {...state, userCart: action.cart}
     default:
       return {...state}
