@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getMovie} from '../store/moviesReducer'
+import {getMovie, addMovieThunk} from '../store/moviesReducer'
 
 class SingleMovie extends React.Component {
   componentDidMount() {
@@ -8,6 +8,12 @@ class SingleMovie extends React.Component {
   }
   render() {
     const {name, image, description, genre, year, price} = this.props.oneMovie
+    const movie = {
+      movieId: this.props.match.params.id,
+      orderId: this.props.cart.id,
+      quantity: 1
+    }
+    console.log(this.props)
     return (
       <div>
         <h1>{name}</h1>
@@ -15,8 +21,10 @@ class SingleMovie extends React.Component {
         <p>{genre}</p>
         <p>{year}</p>
         <p>{description}</p>
-        <p>{'$' + price / 100}</p>
-        <button>Add to Cart</button>
+        <p>${price / 100}</p>
+        <button onClick={() => this.props.addMovieThunk(movie)}>
+          Add to Cart
+        </button>
       </div>
     )
   }
@@ -25,12 +33,16 @@ class SingleMovie extends React.Component {
 const mapStateToProps = state => {
   return {
     movies: state.movies.all,
-    oneMovie: state.movies.oneMovie
+    oneMovie: state.movies.oneMovie,
+    cart: state.cart.userCart
   }
 }
 const mapDispatchToProps = dispatch => ({
   getMovie: id => {
     dispatch(getMovie(id))
+  },
+  addMovieThunk: movie => {
+    dispatch(addMovieThunk(movie))
   }
 })
 
