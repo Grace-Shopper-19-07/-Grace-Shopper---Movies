@@ -28,13 +28,7 @@ class ShoppingCart extends React.Component {
       return (
         <div className="cart">
           <div>
-            {this.props.cart.movies.map((movie, idx) => (
-              <div key={idx}>
-                <img src={movie.image} />
-                <p>{movie.name}</p>
-                <p>${movie.price / 100}</p>
-              </div>
-            ))}
+            <p>{this.props.cart.movies[0].name}</p>
             <button>Back to Shopping</button>
           </div>
         </div>
