@@ -1,9 +1,10 @@
 body {
   font-family: sans-serif;
+  background-color: #f2b400;
 }
 
 a {
-  text-decoration: none;
+  color: white;
 }
 
 label {
@@ -18,4 +19,53 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+img {
+  max-width: 100px;
+  max-height: 150px;
+  margin: 20px;
+}
+
+.movie {
+  overflow-wrap: break-word;
+  max-width: 100px;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: white;
+}
+
+.allmovies {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.navbar {
+  background-color: #f2b400;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 50px;
+  background-color: #f2b400;
+}
+
+.routes {
+  text-align: center;
+  overflow-wrap: break-word;
+  background-color: #0e0d0e;
+  padding: 3%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  color: white;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

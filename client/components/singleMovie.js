@@ -1,24 +1,37 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {gotMovieById} from '../store/moviesReducer'
+import {getMovie} from '../store/moviesReducer'
 
 class SingleMovie extends React.Component {
   componentDidMount() {
-    this.props.getOneMovie(this.props.match.params.id)
+    this.props.getMovie(this.props.match.params.id)
   }
   render() {
-    return <h1>{this.props.oneMovie.name}</h1>
+    const {name, image, description, genre, year, price} = this.props.oneMovie
+    return (
+      <div>
+        <h1>{name}</h1>
+        <img src={image} />
+        <p>{genre}</p>
+        <p>{year}</p>
+        <p>{description}</p>
+        <p>{'$' + price / 100}</p>
+        <button>Add to Cart</button>
+      </div>
+    )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    movies: state.movies,
-    oneMovie: state.oneMovie
+    movies: state.movies.all,
+    oneMovie: state.movies.oneMovie
   }
 }
 const mapDispatchToProps = dispatch => ({
-  getOneMovie: id => dispatch(gotMovieById(id))
+  getMovie: id => {
+    dispatch(getMovie(id))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie)

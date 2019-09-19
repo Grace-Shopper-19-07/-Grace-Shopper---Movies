@@ -7,7 +7,7 @@ const movies = [
     name: 'Hotel Mumbai',
     genre: 'Drama',
     year: 2018,
-    price: 14.99,
+    price: 1499,
     image:
       'https://m.media-amazon.com/images/M/MV5BYTJlZWY2YjYtZGIxMy00MDEwLTliNzMtZGM3MDQ1NzlmNDY1XkEyXkFqcGdeQXVyNDY2MjcyOTQ@._V1_.jpg',
     description:
@@ -18,7 +18,7 @@ const movies = [
     name: "Knight's Tale",
     genre: 'Drama',
     year: '2001',
-    price: 12.99,
+    price: 1299,
     image:
       'https://images-na.ssl-images-amazon.com/images/I/51UaTeuUe1L._SY445_.jpg',
     description:
@@ -29,7 +29,7 @@ const movies = [
     name: 'Life Is Beautiful',
     genre: 'Drama',
     year: 1997,
-    price: 7.99,
+    price: 799,
     image:
       'https://prod.miramax.digital/media/assets/759_LifeIsBeautiful_Catalog_Poster_v2_Approved.png',
     description:
@@ -40,7 +40,7 @@ const movies = [
     name: 'The Shawshank Redemption',
     genre: 'Drama',
     year: 1994,
-    price: 10.67,
+    price: 1067,
     image:
       'https://images-na.ssl-images-amazon.com/images/I/519NBNHX5BL._SY445_.jpg',
     description:
@@ -51,22 +51,18 @@ const movies = [
 
 const users = [
   {
-    username: 'ai',
     email: 'ai@gmail.com',
     password: '123'
   },
   {
-    username: 'ethan',
     email: 'ethan@gmail.com',
     password: '345'
   },
   {
-    username: 'jon',
     email: 'jon@gmail.com',
     password: '567'
   },
   {
-    username: 'mike',
     email: 'mike@gmail.com',
     password: '789'
   }
@@ -74,16 +70,47 @@ const users = [
 
 const orders = [
   {
-    status: 'PENDING'
+    status: 'PENDING',
+    price: 1000,
+    userId: 1
   },
   {
-    status: 'COMPLETE'
+    status: 'COMPLETE',
+    price: 1500,
+    userId: 2
   },
   {
-    status: 'COMPLETE'
+    status: 'COMPLETE',
+    price: 2000,
+    userId: 3
   },
   {
-    status: 'PENDING'
+    status: 'PENDING',
+    price: 2500,
+    userId: 4
+  }
+]
+
+const productOrders = [
+  {
+    quantity: 3,
+    movieId: 1,
+    orderId: 1
+  },
+  {
+    quantity: 1,
+    movieId: 2,
+    orderId: 2
+  },
+  {
+    quantity: 2,
+    movieId: 3,
+    orderId: 3
+  },
+  {
+    quantity: 5,
+    movieId: 4,
+    orderId: 4
   }
 ]
 
@@ -103,6 +130,11 @@ const seed = async () => {
     await Promise.all(
       orders.map(order => {
         return Order.create(order)
+      })
+    )
+    await Promise.all(
+      productOrders.map(order => {
+        return ProductOrder.create(order)
       })
     )
     console.log(green('Seeding success!'))

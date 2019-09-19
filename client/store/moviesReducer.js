@@ -13,7 +13,7 @@ const gotMovies = movies => ({
   movies
 })
 
-const getOneMovie = movie => ({
+const gotMovie = movie => ({
   type: GET_MOVIE_BY_ID,
   movie
 })
@@ -25,10 +25,10 @@ export const getMovies = () => {
   }
 }
 
-export const gotMovieById = id => {
+export const getMovie = id => {
   return async dispatch => {
-    const {data} = await axios.get(`/api/movie/${id}`)
-    dispatch(getOneMovie(data))
+    const {data} = await axios.get(`/api/movies/${id}`)
+    dispatch(gotMovie(data))
   }
 }
 
