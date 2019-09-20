@@ -13,7 +13,6 @@ const gotLoggedInUserCart = cart => {
 }
 
 export const getUserCartById = id => {
-  console.log('ID from CartReducer', id)
   return async dispatch => {
     const {data} = await axios.get('/api/cart/' + id)
     dispatch(gotLoggedInUserCart(data))
