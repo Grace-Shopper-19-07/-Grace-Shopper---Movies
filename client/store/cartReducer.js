@@ -2,7 +2,10 @@ import axios from 'axios'
 import {me} from './user'
 
 const initialState = {
-  userCart: {id: 0}
+  userCart: {
+    id: 0,
+    movies: []
+  }
 }
 
 const GET_LOGGED_IN_SHOPPING_CART = 'GET_LOGGED_IN_SHOPPING_CART'
@@ -48,6 +51,19 @@ export const deleteCart = () => {
   }
 }
 
+const ADD_MOVIE = 'ADD_MOVIE'
+const addMovie = movie => ({
+  type: ADD_MOVIE,
+  movie
+})
+
+export const addMovieThunk = movie => {
+  return async dispatch => {
+    await axios.post(`/api/cart/`, movie)
+    dispatch(addMovie(movie))
+  }
+}
+
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case DELETE_CART:
@@ -62,6 +78,14 @@ export default function cartReducer(state = initialState, action) {
         return {...state}
       }
       return {...state, userCart: action.cart}
+    case ADD_MOVIE:
+      return {
+        ...state,
+        userCart: {
+          ...state.userCart,
+          movies: [...state.userCart.movies, action.movie]
+        }
+      }
     default:
       return {...state}
   }

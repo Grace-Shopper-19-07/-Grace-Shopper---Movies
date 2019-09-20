@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getMovie, addMovieThunk} from '../store/moviesReducer'
-import {getUserCartById} from '../store/cartReducer'
+import {getMovie} from '../store/moviesReducer'
+import {getUserCartById, addMovieThunk} from '../store/cartReducer'
 
 class SingleMovie extends React.Component {
   componentDidMount() {
