@@ -17,19 +17,19 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    console.log('PROPS FROM SHOPPING CART', this.props)
-    if (Object.keys(this.props.user).length === 0) {
-      if (!this.props.cart.movies) {
-        return <div> Your cart is empty</div>
-      }
-      return <div />
-    }
+    console.log(this.props)
+    // if (Object.keys(this.props.user).length === 0) {
+    //   if (!this.props.cart.movies) {
+    //     return <div> Your cart is empty</div>
+    //   }
+    //   return <div />
+    // }
     if (this.props.cart.movies) {
       return (
         <div className="cart">
           <div>
-            {this.props.cart.movies.map((movie, idx) => (
-              <div key={idx}>
+            {this.props.cart.movies.map(movie => (
+              <div key={movie.id}>
                 <img src={movie.image} />
                 <p>{movie.name}</p>
                 <p>${movie.price / 100}</p>
