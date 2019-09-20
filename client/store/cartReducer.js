@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {me} from './user'
 
 const initialState = {
   userCart: {id: 0}
@@ -14,7 +15,8 @@ const gotLoggedInUserCart = cart => {
 
 export const getUserCartById = id => {
   return async dispatch => {
-    const {data} = await axios.get('/api/cart/' + id)
+    const user = await axios.get('/auth/me')
+    const {data} = await axios.get(`/api/cart/${user.data.id}`)
     dispatch(gotLoggedInUserCart(data))
   }
 }
