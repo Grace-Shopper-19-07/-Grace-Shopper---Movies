@@ -11,19 +11,10 @@ import {
 
 class ShoppingCart extends React.Component {
   componentDidMount() {
-    if (this.props.user.id) {
-      this.props.renderCart(this.props.user.id)
-    }
+    this.props.renderCart()
   }
 
   render() {
-    console.log(this.props)
-    // if (Object.keys(this.props.user).length === 0) {
-    //   if (!this.props.cart.movies) {
-    //     return <div> Your cart is empty</div>
-    //   }
-    //   return <div />
-    // }
     if (this.props.cart.movies) {
       return (
         <div className="cart">
@@ -62,7 +53,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     renderCart: id => {
-      dispatch(getUserCartById(id))
+      dispatch(getUserCartById())
     }
   }
 }
