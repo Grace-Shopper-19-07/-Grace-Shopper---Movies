@@ -32,12 +32,6 @@ export const getMovie = id => {
   }
 }
 
-export const addMovieThunk = movie => {
-  return async () => {
-    await axios.post(`/api/cart/`, movie)
-  }
-}
-
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_MOVIES:
