@@ -68,8 +68,10 @@ export const removeMovieThunk = movie => {
   return async dispatch => {
     const user = await axios.get('/auth/me')
     await axios.delete(`/api/cart/${user.data.id}`, {
-      orderId: user.data.id,
-      movieId: movie.id
+      data: {
+        orderId: movie.ProductOrder.orderId,
+        movieId: movie.id
+      }
     })
   }
 }

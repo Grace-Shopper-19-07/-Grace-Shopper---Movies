@@ -44,6 +44,8 @@ router.put('/', async (req, res, next) => {
 
 router.delete('/:userId', async (req, res, next) => {
   try {
+    console.log('REQ>BODY', req.body)
+
     await ProductOrder.destroy({
       where: {orderId: req.body.orderId, movieId: req.body.movieId}
     })
