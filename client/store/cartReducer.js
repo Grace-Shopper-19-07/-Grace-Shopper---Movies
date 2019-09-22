@@ -3,8 +3,8 @@ import {me} from './user'
 
 const initialState = {
   userCart: {
-    id: 0,
-    movies: []
+    id: 0
+    // movies: []
   }
 }
 
@@ -51,16 +51,26 @@ export const deleteCart = () => {
   }
 }
 
-const ADD_MOVIE = 'ADD_MOVIE'
-const addMovie = movie => ({
-  type: ADD_MOVIE,
-  movie
-})
+// const ADD_MOVIE = 'ADD_MOVIE'
+// const addMovie = movie => ({
+//   type: ADD_MOVIE,
+//   movie
+// })
 
 export const addMovieThunk = movie => {
   return async dispatch => {
     await axios.post(`/api/cart/`, movie)
-    dispatch(addMovie(movie))
+    // dispatch(addMovie(movie))
+  }
+}
+
+export const removeMovieThunk = movie => {
+  return async dispatch => {
+    const user = await axios.get('/auth/me')
+    await axios.delete(`/api/cart/${user.data.id}`, {
+      orderId: user.data.id,
+      movieId: movie.id
+    })
   }
 }
 
@@ -78,14 +88,14 @@ export default function cartReducer(state = initialState, action) {
         return {...state}
       }
       return {...state, userCart: action.cart}
-    case ADD_MOVIE:
-      return {
-        ...state,
-        userCart: {
-          ...state.userCart,
-          movies: [...state.userCart.movies, action.movie]
-        }
-      }
+    // case ADD_MOVIE:
+    //   return {
+    //     ...state,
+    //     userCart: {
+    //       ...state.userCart,
+    //       movies: [...state.userCart.movies, action.movie]
+    //     }
+    //   }
     default:
       return {...state}
   }
