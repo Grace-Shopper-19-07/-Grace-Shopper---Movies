@@ -10,10 +10,6 @@ import {
 } from '../store/cartReducer'
 
 class ShoppingCart extends React.Component {
-  componentDidMount() {
-    this.props.renderCart()
-  }
-
   render() {
     if (this.props.cart.movies) {
       return (
@@ -52,7 +48,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    renderCart: id => {
+    renderCart: () => {
       dispatch(getUserCartById())
     }
   }

@@ -3,18 +3,15 @@ import {Link} from 'react-router-dom'
 import {getUserCartById} from '../store/cartReducer'
 import {connect} from 'react-redux'
 
-// const Footer = () => (
-//   <div className="footer">
-//     <Link to="./contact">Contact Us</Link>
-//     <Link to="./about">About Us</Link>
-//   </div>
-// )
-
 class Footer extends React.Component {
   componentDidMount() {
-    this.props.renderCart()
+    if (this.props.state.user.id) {
+      console.log('props', this.props)
+      this.props.renderCart()
+    }
   }
   render() {
+    console.log('render', this.props)
     return (
       <div className="footer">
         <Link to="./contact">Contact Us</Link>
@@ -24,12 +21,18 @@ class Footer extends React.Component {
   }
 }
 
+const mapState = state => {
+  return {
+    state: state
+  }
+}
+
 const mapDispatch = dispatch => {
   return {
-    renderCart: id => {
+    renderCart: () => {
       dispatch(getUserCartById())
     }
   }
 }
 
-export default connect(null, mapDispatch)(Footer)
+export default connect(mapState, mapDispatch)(Footer)

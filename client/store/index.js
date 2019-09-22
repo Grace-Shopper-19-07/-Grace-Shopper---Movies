@@ -6,6 +6,7 @@ import userReducer from './user'
 import moviesReducer from './moviesReducer'
 import cartReducer from './cartReducer'
 import {loadState, saveState} from '../localStorage'
+import throttle from 'lodash.throttle'
 
 const persistatedState = loadState()
 
@@ -17,14 +18,16 @@ const reducer = combineReducers({
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
-const store = createStore(reducer, middleware)
-// const store = createStore(reducer, persistatedState, middleware)
+// const store = createStore(reducer, middleware)
+const store = createStore(reducer, persistatedState, middleware)
 
-// store.subscribe(() => {
-//   saveState({
-//     cart: store.getState().cart
-//   })
-// })
+store.subscribe(
+  throttle(() => {
+    saveState({
+      cart: store.getState().cart
+    })
+  }, 1000)
+)
 
 export default store
 export * from './user'
