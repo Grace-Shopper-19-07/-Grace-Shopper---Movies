@@ -10,6 +10,9 @@ import {
 } from '../store/cartReducer'
 
 class ShoppingCart extends React.Component {
+  componentDidMount() {
+    if (this.props.user.id) this.props.renderCart(this.props.user.id)
+  }
   render() {
     if (this.props.cart.movies) {
       return (
@@ -31,7 +34,12 @@ class ShoppingCart extends React.Component {
             {/* <Link to="/checkout">
               <button>Proceed to Checkout</button>
             </Link> */}
-            <button onClick={() => this.props.checkout(this.props.user.id)}>
+            <button
+              onClick={() => {
+                this.props.checkout(this.props.user.id)
+                this.props.renderCart()
+              }}
+            >
               Checkout
             </button>
           </div>
