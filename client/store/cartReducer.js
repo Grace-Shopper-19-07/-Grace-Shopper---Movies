@@ -10,10 +10,18 @@ const UPDATE_CART = 'UPDATE_CART'
 const DELETE_CART = 'DELETE_CART'
 const ADD_GUEST_CART = 'ADD_GUEST_CART'
 const CHECK_CART_OUT = 'CHECK_CART_OUT'
+const ADD_MOVIE = 'ADD_MOVIE'
 
 const cartCheckedOut = () => {
   return {
     type: CHECK_CART_OUT
+  }
+}
+
+const addMovie = movie => {
+  return {
+    type: ADD_MOVIE,
+    movie
   }
 }
 
@@ -81,7 +89,7 @@ export const addGuestCartThunk = cart => {
 export const addMovieThunk = movie => {
   return async dispatch => {
     await axios.post(`/api/cart/`, movie)
-    // dispatch(addMovie(movie))
+    dispatch(addMovie(movie))
   }
 }
 
@@ -99,6 +107,14 @@ export const removeMovieThunk = movie => {
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
+    case ADD_MOVIE:
+      return {
+        ...state,
+        userCart: {
+          ...state.userCart,
+          movies: [...state.userCart.movies, action.movie]
+        }
+      }
     case DELETE_CART:
       return {...state, userCart: {id: 0, movies: []}}
     case CHECK_CART_OUT:
