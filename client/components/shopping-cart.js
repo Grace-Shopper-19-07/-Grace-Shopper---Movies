@@ -11,7 +11,7 @@ import {
 
 class ShoppingCart extends React.Component {
   componentDidMount() {
-    if (this.props.user.id) this.props.renderCart(this.props.user.id)
+    if (this.props.user.id) this.props.renderCart()
   }
   render() {
     if (this.props.cart.movies) {
