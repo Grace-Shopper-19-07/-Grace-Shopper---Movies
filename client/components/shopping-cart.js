@@ -2,12 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
-import {
-  getUserCartById,
-  checkOutThunk,
-  removeMovieThunk
-} from '../store/cartReducer'
+import {getUserCartById, removeMovieThunk} from '../store/cartReducer'
 
 class ShoppingCart extends React.Component {
   componentDidMount() {
@@ -31,17 +26,9 @@ class ShoppingCart extends React.Component {
             <Link to="/movies">
               <button>Back to Shopping</button>
             </Link>
-            {/* <Link to="/checkout">
+            <Link to="/checkout">
               <button>Proceed to Checkout</button>
-            </Link> */}
-            <button
-              onClick={() => {
-                this.props.checkout(this.props.user.id)
-                this.props.renderCart()
-              }}
-            >
-              Checkout
-            </button>
+            </Link>
           </div>
         </div>
       )
@@ -72,9 +59,6 @@ const mapDispatch = dispatch => {
     },
     removeMovie: movie => {
       dispatch(removeMovieThunk(movie))
-    },
-    checkout: userId => {
-      dispatch(checkOutThunk(userId))
     }
   }
 }
