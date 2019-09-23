@@ -1,15 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {getMovie} from '../store/moviesReducer'
-import {getUserCartById, addMovieThunk} from '../store/cartReducer'
+import {getMovie, addMovieThunk} from '../store/moviesReducer'
+import {getUserCartById, addGuestCartThunk} from '../store/cartReducer'
 
 class SingleMovie extends React.Component {
   componentDidMount() {
     this.props.getMovie(this.props.match.params.id)
-    if (this.props.user.id) {
-      this.props.renderCart(this.props.user.id)
-    }
+    // if (this.props.user.id) {
+    //   this.props.renderCart(this.props.user.id)
+    // }
   }
   render() {
     const {name, image, description, genre, year, price} = this.props.oneMovie
@@ -18,6 +17,8 @@ class SingleMovie extends React.Component {
       orderId: this.props.cart.id,
       quantity: 1
     }
+    const cart = this.props.oneMovie
+
     console.log(this.props)
     return (
       <div>
@@ -27,11 +28,17 @@ class SingleMovie extends React.Component {
         <p>{year}</p>
         <p>{description}</p>
         <p>${price / 100}</p>
-        <Link to="/movies">
-          <button onClick={() => this.props.addMovieThunk(movie)}>
-            Add to Cart
-          </button>
-        </Link>
+        <button
+          onClick={() => {
+            if (this.props.user.id) {
+              this.props.addMovieThunk(movie)
+            } else {
+              this.props.addGuestCartThunk(cart)
+            }
+          }}
+        >
+          Add to Cart
+        </button>
       </div>
     )
   }
@@ -54,6 +61,9 @@ const mapDispatchToProps = dispatch => ({
   },
   renderCart: id => {
     dispatch(getUserCartById(id))
+  },
+  addGuestCartThunk: cart => {
+    dispatch(addGuestCartThunk(cart))
   }
 })
 

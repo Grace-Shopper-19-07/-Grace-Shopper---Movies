@@ -2,13 +2,14 @@ import axios from 'axios'
 import {me} from './user'
 
 const initialState = {
-  userCart: {
-    id: 0
-    // movies: []
-  }
+  userCart: {id: 0, movies: []}
 }
 
 const GET_LOGGED_IN_SHOPPING_CART = 'GET_LOGGED_IN_SHOPPING_CART'
+const UPDATE_CART = 'UPDATE_CART'
+const DELETE_CART = 'DELETE_CART'
+const ADD_GUEST_CART = 'ADD_GUEST_CART'
+
 const gotLoggedInUserCart = cart => {
   return {
     type: GET_LOGGED_IN_SHOPPING_CART,
@@ -16,18 +17,25 @@ const gotLoggedInUserCart = cart => {
   }
 }
 
-export const getUserCartById = id => {
+export const getUserCartById = () => {
   return async dispatch => {
     const user = await axios.get('/auth/me')
     const {data} = await axios.get(`/api/cart/${user.data.id}`)
     dispatch(gotLoggedInUserCart(data))
   }
 }
-const UPDATE_CART = 'UPDATE_CART'
+
 const gotUpdatedCart = quantity => {
   return {
     type: UPDATE_CART,
     quantity
+  }
+}
+
+const addGuestCart = cart => {
+  return {
+    type: ADD_GUEST_CART,
+    cart
   }
 }
 
@@ -38,7 +46,6 @@ export const updateCartThunk = updatedQuantity => {
   }
 }
 
-const DELETE_CART = 'DELETE_CART'
 const deletedCart = () => {
   return {
     type: DELETE_CART
@@ -51,11 +58,9 @@ export const deleteCart = () => {
   }
 }
 
-// const ADD_MOVIE = 'ADD_MOVIE'
-// const addMovie = movie => ({
-//   type: ADD_MOVIE,
-//   movie
-// })
+export const addGuestCartThunk = cart => {
+  return dispatch => {
+    dispatch(addGuestCart(cart))
 
 export const addMovieThunk = movie => {
   return async dispatch => {
@@ -90,14 +95,14 @@ export default function cartReducer(state = initialState, action) {
         return {...state}
       }
       return {...state, userCart: action.cart}
-    // case ADD_MOVIE:
-    //   return {
-    //     ...state,
-    //     userCart: {
-    //       ...state.userCart,
-    //       movies: [...state.userCart.movies, action.movie]
-    //     }
-    //   }
+    case ADD_GUEST_CART:
+      return {
+        ...state,
+        userCart: {
+          ...state.userCart,
+          movies: [...state.userCart.movies, action.cart]
+        }
+      }
     default:
       return {...state}
   }
