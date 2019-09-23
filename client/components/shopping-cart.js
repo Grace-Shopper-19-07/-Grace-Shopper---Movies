@@ -6,36 +6,36 @@ import {logout} from '../store'
 import {
   getUserCartById,
   updateCartThunk,
-  deleteCart
+  deleteCart,
+  removeMovieThunk
 } from '../store/cartReducer'
 
 class ShoppingCart extends React.Component {
   componentDidMount() {
-    if (this.props.user.id) {
-      this.props.renderCart(this.props.user.id)
-    }
+    this.props.renderCart()
   }
 
   render() {
-    console.log('PROPS FROM SHOPPING CART', this.props)
-    if (Object.keys(this.props.user).length === 0) {
-      if (!this.props.cart.movies) {
-        return <div> Your cart is empty</div>
-      }
-      return <div />
-    }
     if (this.props.cart.movies) {
       return (
         <div className="cart">
           <div>
-            {this.props.cart.movies.map((movie, idx) => (
-              <div key={idx}>
+            {this.props.cart.movies.map(movie => (
+              <div key={movie.id}>
                 <img src={movie.image} />
                 <p>{movie.name}</p>
                 <p>${movie.price / 100}</p>
+                <button onClick={() => this.props.removeMovie(movie)}>
+                  Remove from Cart
+                </button>
               </div>
             ))}
-            <button>Back to Shopping</button>
+            <Link to="/movies">
+              <button>Back to Shopping</button>
+            </Link>
+            <Link to="/checkout">
+              <button>Proceed to Checkout</button>
+            </Link>
           </div>
         </div>
       )
@@ -62,7 +62,10 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     renderCart: id => {
-      dispatch(getUserCartById(id))
+      dispatch(getUserCartById())
+    },
+    removeMovie: movie => {
+      dispatch(removeMovieThunk(movie))
     }
   }
 }

@@ -34,8 +34,8 @@ class AllMovies extends React.Component {
           </label>
         </div>
         <div className="allmovies">
-          {this.props.movies.map((movie, idx) => (
-            <div key={idx}>
+          {this.props.movies.map(movie => (
+            <div key={movie.id}>
               <img src={movie.image} />
               <br />
               <p className="movie">

@@ -1,18 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {getUserCartById} from '../store/cartReducer'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
+// export const UserHome = props => {
+export class UserHome extends React.Component {
+  componentDidMount() {
+    this.props.renderCart()
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+  render() {
+    const email = this.props.email
+    console.log('props', this.props)
+    return (
+      <div>
+        <h3>Welcome, {email}</h3>
+      </div>
+    )
+  }
 }
 
 /**
@@ -20,11 +28,20 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    user: state.user.id
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => {
+  return {
+    renderCart: id => {
+      dispatch(getUserCartById())
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(UserHome)
 
 /**
  * PROP TYPES

@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getMovie, addMovieThunk} from '../store/moviesReducer'
-import {getUserCartById} from '../store/cartReducer'
+import {Link} from 'react-router-dom'
+import {getMovie} from '../store/moviesReducer'
+import {getUserCartById, addMovieThunk} from '../store/cartReducer'
 
 class SingleMovie extends React.Component {
   componentDidMount() {
@@ -26,9 +27,11 @@ class SingleMovie extends React.Component {
         <p>{year}</p>
         <p>{description}</p>
         <p>${price / 100}</p>
-        <button onClick={() => this.props.addMovieThunk(movie)}>
-          Add to Cart
-        </button>
+        <Link to="/movies">
+          <button onClick={() => this.props.addMovieThunk(movie)}>
+            Add to Cart
+          </button>
+        </Link>
       </div>
     )
   }
