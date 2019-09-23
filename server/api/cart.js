@@ -42,6 +42,25 @@ router.put('/', async (req, res, next) => {
   }
 })
 
+router.put('/checkout', async (req, res, next) => {
+  console.log(req.body)
+  try {
+    await Order.update(
+      {
+        status: 'COMPLETE'
+      },
+      {
+        where: {
+          userId: req.body.userId,
+          status: 'PENDING'
+        }
+      }
+    )
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/', async (req, res, next) => {
   try {
     await ProductOrder.destroy({

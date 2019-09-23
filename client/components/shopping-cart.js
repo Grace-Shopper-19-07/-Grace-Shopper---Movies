@@ -4,17 +4,19 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {
+  CheckOutThunk,
   getUserCartById,
   updateCartThunk,
   deleteCart
 } from '../store/cartReducer'
 
 class ShoppingCart extends React.Component {
-  componentDidMount() {
-    this.props.renderCart()
-  }
+  // componentDidMount() {
+  //   this.props.renderCart()
+  // }
 
   render() {
+    // console.log(props)
     if (this.props.cart.movies) {
       return (
         <div className="cart">
@@ -27,6 +29,10 @@ class ShoppingCart extends React.Component {
               </div>
             ))}
             <button>Back to Shopping</button>
+            <button onClick={() => this.props.checkout(this.props.user.id)}>
+              {' '}
+              Checkout{' '}
+            </button>
           </div>
         </div>
       )
@@ -52,8 +58,11 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    renderCart: id => {
+    renderCart: () => {
       dispatch(getUserCartById())
+    },
+    checkout: userId => {
+      dispatch(CheckOutThunk(userId))
     }
   }
 }

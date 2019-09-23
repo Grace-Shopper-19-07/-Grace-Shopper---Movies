@@ -6,9 +6,9 @@ import {getUserCartById, addMovieThunk} from '../store/cartReducer'
 class SingleMovie extends React.Component {
   componentDidMount() {
     this.props.getMovie(this.props.match.params.id)
-    if (this.props.user.id) {
-      this.props.renderCart(this.props.user.id)
-    }
+    // if (this.props.user.id) {
+    //   this.props.renderCart(this.props.user.id)
+    // }
   }
   render() {
     const {name, image, description, genre, year, price} = this.props.oneMovie

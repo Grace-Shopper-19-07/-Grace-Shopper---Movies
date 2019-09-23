@@ -16,7 +16,7 @@ const gotLoggedInUserCart = cart => {
   }
 }
 
-export const getUserCartById = id => {
+export const getUserCartById = () => {
   return async dispatch => {
     const user = await axios.get('/auth/me')
     const {data} = await axios.get(`/api/cart/${user.data.id}`)
@@ -38,10 +38,17 @@ export const updateCartThunk = updatedQuantity => {
   }
 }
 
-const DELETE_CART = 'DELETE_CART'
-const deletedCart = () => {
+const CHECK_CART_OUT = 'CHECK_CART_OUT'
+const cartCheckedOut = () => {
   return {
-    type: DELETE_CART
+    type: CHECK_CART_OUT
+  }
+}
+
+export const CheckOutThunk = userId => {
+  return async dispatch => {
+    const {data} = await axios.put(`/api/cart/checkout`, {userId: userId})
+    dispatch(cartCheckedOut())
   }
 }
 
@@ -66,8 +73,8 @@ export const addMovieThunk = movie => {
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case DELETE_CART:
-      return {...state, userCart: {}}
+    case CHECK_CART_OUT:
+      return {...state, userCart: {id: 0, movies: []}}
     case UPDATE_CART:
       return {
         ...state,
@@ -79,11 +86,20 @@ export default function cartReducer(state = initialState, action) {
       }
       return {...state, userCart: action.cart}
     case ADD_MOVIE:
-      return {
-        ...state,
-        userCart: {
-          ...state.userCart,
-          movies: [...state.userCart.movies, action.movie]
+      if (state.userCart.movies !== undefined) {
+        return {
+          ...state,
+          userCart: {
+            ...state.userCart,
+            movies: [...state.userCart.movies, action.movie]
+          }
+        }
+      } else {
+        return {
+          ...state,
+          userCart: {
+            movies: [action.movie]
+          }
         }
       }
     default:
