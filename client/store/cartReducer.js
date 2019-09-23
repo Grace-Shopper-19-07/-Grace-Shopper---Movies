@@ -61,6 +61,8 @@ export const deleteCart = () => {
 export const addGuestCartThunk = cart => {
   return dispatch => {
     dispatch(addGuestCart(cart))
+  }
+}
 
 export const addMovieThunk = movie => {
   return async dispatch => {
