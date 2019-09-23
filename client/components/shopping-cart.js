@@ -6,7 +6,8 @@ import {logout} from '../store'
 import {
   getUserCartById,
   updateCartThunk,
-  deleteCart
+  deleteCart,
+  removeMovieThunk
 } from '../store/cartReducer'
 
 class ShoppingCart extends React.Component {
@@ -20,9 +21,17 @@ class ShoppingCart extends React.Component {
                 <img src={movie.image} />
                 <p>{movie.name}</p>
                 <p>${movie.price / 100}</p>
+                <button onClick={() => this.props.removeMovie(movie)}>
+                  Remove from Cart
+                </button>
               </div>
             ))}
-            <button>Back to Shopping</button>
+            <Link to="/movies">
+              <button>Back to Shopping</button>
+            </Link>
+            <Link to="/checkout">
+              <button>Proceed to Checkout</button>
+            </Link>
           </div>
         </div>
       )
@@ -50,6 +59,9 @@ const mapDispatch = dispatch => {
   return {
     renderCart: () => {
       dispatch(getUserCartById())
+    },
+    removeMovie: movie => {
+      dispatch(removeMovieThunk(movie))
     }
   }
 }

@@ -61,6 +61,23 @@ export const deleteCart = () => {
 export const addGuestCartThunk = cart => {
   return dispatch => {
     dispatch(addGuestCart(cart))
+
+export const addMovieThunk = movie => {
+  return async dispatch => {
+    await axios.post(`/api/cart/`, movie)
+    // dispatch(addMovie(movie))
+  }
+}
+
+export const removeMovieThunk = movie => {
+  return async dispatch => {
+    const user = await axios.get('/auth/me')
+    await axios.delete(`/api/cart/${user.data.id}`, {
+      data: {
+        orderId: movie.ProductOrder.orderId,
+        movieId: movie.id
+      }
+    })
   }
 }
 
