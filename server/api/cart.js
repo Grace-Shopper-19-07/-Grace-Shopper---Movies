@@ -42,14 +42,31 @@ router.put('/', async (req, res, next) => {
   }
 })
 
-router.delete('/:userId', async (req, res, next) => {
+router.delete('/', async (req, res, next) => {
   try {
-    console.log('REQ>BODY', req.body)
-
     await ProductOrder.destroy({
       where: {orderId: req.body.orderId, movieId: req.body.movieId}
     })
     res.status(202).end()
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/checkout', async (req, res, next) => {
+  try {
+    await Order.update(
+      {
+        status: 'COMPLETE'
+      },
+      {
+        where: {
+          userId: req.body.userId,
+          status: 'PENDING'
+        }
+      }
+    )
+    res.status(204).end()
   } catch (err) {
     next(err)
   }
