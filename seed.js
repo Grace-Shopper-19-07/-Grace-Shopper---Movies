@@ -52,19 +52,23 @@ const movies = [
 const users = [
   {
     email: 'ai@gmail.com',
-    password: '123'
+    password: '123',
+    id: 1
   },
   {
     email: 'ethan@gmail.com',
-    password: '345'
+    password: '345',
+    id: 2
   },
   {
     email: 'jon@gmail.com',
-    password: '567'
+    password: '567',
+    id: 3
   },
   {
     email: 'mike@gmail.com',
-    password: '789'
+    password: '789',
+    id: 4
   }
 ]
 

@@ -9,19 +9,18 @@ const GET_LOGGED_IN_SHOPPING_CART = 'GET_LOGGED_IN_SHOPPING_CART'
 const UPDATE_CART = 'UPDATE_CART'
 const DELETE_CART = 'DELETE_CART'
 const ADD_GUEST_CART = 'ADD_GUEST_CART'
+const CHECK_CART_OUT = 'CHECK_CART_OUT'
+
+const cartCheckedOut = () => {
+  return {
+    type: CHECK_CART_OUT
+  }
+}
 
 const gotLoggedInUserCart = cart => {
   return {
     type: GET_LOGGED_IN_SHOPPING_CART,
     cart
-  }
-}
-
-export const getUserCartById = () => {
-  return async dispatch => {
-    const user = await axios.get('/auth/me')
-    const {data} = await axios.get(`/api/cart/${user.data.id}`)
-    dispatch(gotLoggedInUserCart(data))
   }
 }
 
@@ -39,16 +38,31 @@ const addGuestCart = cart => {
   }
 }
 
+const deletedCart = () => {
+  return {
+    type: DELETE_CART
+  }
+}
+
+export const checkOutThunk = userId => {
+  return async dispatch => {
+    const {data} = await axios.put(`/api/cart/checkout`, {userId: userId})
+    dispatch(cartCheckedOut())
+  }
+}
+
+export const getUserCartById = () => {
+  return async dispatch => {
+    const user = await axios.get('/auth/me')
+    const {data} = await axios.get(`/api/cart/${user.data.id}`)
+    dispatch(gotLoggedInUserCart(data))
+  }
+}
+
 export const updateCartThunk = updatedQuantity => {
   return async dispatch => {
     const {data} = await axios.put('/api/cart', updatedQuantity)
     dispatch(gotUpdatedCart(updatedQuantity))
-  }
-}
-
-const deletedCart = () => {
-  return {
-    type: DELETE_CART
   }
 }
 
@@ -86,7 +100,9 @@ export const removeMovieThunk = movie => {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case DELETE_CART:
-      return {...state, userCart: {}}
+      return {...state, userCart: {id: 0, movies: []}}
+    case CHECK_CART_OUT:
+      return {...state, userCart: {id: 0, movies: []}}
     case UPDATE_CART:
       return {
         ...state,

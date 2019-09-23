@@ -5,8 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {
   getUserCartById,
-  updateCartThunk,
-  deleteCart,
+  checkOutThunk,
   removeMovieThunk
 } from '../store/cartReducer'
 
@@ -29,9 +28,12 @@ class ShoppingCart extends React.Component {
             <Link to="/movies">
               <button>Back to Shopping</button>
             </Link>
-            <Link to="/checkout">
+            {/* <Link to="/checkout">
               <button>Proceed to Checkout</button>
-            </Link>
+            </Link> */}
+            <button onClick={() => this.props.checkout(this.props.user.id)}>
+              Checkout
+            </button>
           </div>
         </div>
       )
@@ -62,6 +64,9 @@ const mapDispatch = dispatch => {
     },
     removeMovie: movie => {
       dispatch(removeMovieThunk(movie))
+    },
+    checkout: userId => {
+      dispatch(checkOutThunk(userId))
     }
   }
 }

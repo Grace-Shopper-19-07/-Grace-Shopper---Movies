@@ -6,12 +6,10 @@ import {connect} from 'react-redux'
 class Footer extends React.Component {
   componentDidMount() {
     if (this.props.state.user.id) {
-      console.log('props', this.props)
       this.props.renderCart()
     }
   }
   render() {
-    console.log('render', this.props)
     return (
       <div className="footer">
         <Link to="./contact">Contact Us</Link>
