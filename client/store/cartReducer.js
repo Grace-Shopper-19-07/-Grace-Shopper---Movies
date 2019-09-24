@@ -152,6 +152,11 @@ export default function cartReducer(state = initialState, action) {
     case GET_LOGGED_IN_SHOPPING_CART:
       if (action.cart === null) {
         return {...state}
+      } else if (action.cart.movies === undefined) {
+        return {
+          ...state,
+          userCart: {...action.cart, movies: state.userCart.movies}
+        }
       }
       return {...state, userCart: action.cart}
     case ADD_GUEST_CART:
