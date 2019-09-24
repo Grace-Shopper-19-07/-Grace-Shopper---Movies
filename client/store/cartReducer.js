@@ -62,8 +62,10 @@ const deletedCart = () => {
 
 export const checkOutThunk = userId => {
   return async dispatch => {
-    const {data} = await axios.put(`/api/cart/checkout`, {userId: userId})
+    await axios.put(`/api/cart/checkout`, {userId: userId})
     dispatch(cartCheckedOut())
+    const {data} = await axios.get(`/api/cart`)
+    dispatch(gotLoggedInUserCart(data))
   }
 }
 
