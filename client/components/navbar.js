@@ -8,7 +8,15 @@ import {deleteCart, getUserCartById} from '../store/cartReducer'
 const Navbar = ({handleClick, isLoggedIn, id}) => (
   <div className="navbar">
     <h1>
-      <Link to="/">BUMBLE BEE MOVIES</Link>
+      <Link
+        to="/"
+        style={{
+          textDecoration: 'none',
+          color: 'black'
+        }}
+      >
+        BUMBLE BEE MOVIES
+      </Link>
     </h1>
     <nav>
       {isLoggedIn ? (

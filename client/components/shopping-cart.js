@@ -9,6 +9,7 @@ class ShoppingCart extends React.Component {
     if (this.props.user.id) this.props.renderCart()
   }
   render() {
+    console.log(this.props)
     if (this.props.cart.movies) {
       return (
         <div className="cart">
@@ -18,17 +19,26 @@ class ShoppingCart extends React.Component {
                 <img src={movie.image} />
                 <p>{movie.name}</p>
                 <p>${movie.price / 100}</p>
-                <button onClick={() => this.props.removeMovie(movie)}>
+                <button
+                  type="submit"
+                  onClick={() => this.props.removeMovie(movie)}
+                >
                   Remove from Cart
                 </button>
               </div>
             ))}
             <Link to="/movies">
-              <button>Back to Shopping</button>
+              <button type="submit">Back to Shopping</button>
             </Link>
-            <Link to="/checkout">
-              <button>Proceed to Checkout</button>
-            </Link>
+            {Object.keys(this.props.user).length > 1 ? (
+              <Link to="/checkout">
+                <button type="submit">Proceed to Checkout</button>
+              </Link>
+            ) : (
+              <Link to="/guestcheckout">
+                <button type="submit">Proceed to Checkout</button>
+              </Link>
+            )}
           </div>
         </div>
       )

@@ -12,7 +12,8 @@ import {
   SingleMovie,
   ShoppingCart,
   Checkout,
-  PostCheckout
+  PostCheckout,
+  GuestCheckOut
 } from './components'
 import {me} from './store'
 
@@ -39,6 +40,7 @@ class Routes extends Component {
         <Route exact path="/cart" component={ShoppingCart} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/postcheckout" component={PostCheckout} />
+        <Route exact path="/guestcheckout" component={GuestCheckOut} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
