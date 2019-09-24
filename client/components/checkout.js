@@ -41,7 +41,6 @@ class Checkout extends React.Component {
               type="submit"
               onClick={() => {
                 this.props.checkout(this.props.user.id)
-                this.props.renderCart()
               }}
             >
               Submit Order
