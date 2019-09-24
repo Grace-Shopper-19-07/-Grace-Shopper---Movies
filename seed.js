@@ -53,7 +53,8 @@ const users = [
   {
     email: 'ai@gmail.com',
     password: '123',
-    id: 1
+    id: 1,
+    isAdmin: true
   },
   {
     email: 'ethan@gmail.com',
