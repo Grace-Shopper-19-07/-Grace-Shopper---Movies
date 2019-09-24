@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const {ProductOrder, User, Order, Movie} = require('../db/models')
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const [order, wasCreated] = await Order.findOrCreate({
-      where: {userId: req.params.userId, status: 'PENDING'},
+      where: {userId: req.user.id, status: 'PENDING'},
       include: {model: Movie}
     })
     res.json(order)

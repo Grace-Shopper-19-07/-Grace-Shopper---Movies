@@ -15,7 +15,7 @@ const Navbar = ({handleClick, isLoggedIn, id}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <input type="text" className="input" placeholder="Search..." />
-          <Link to={`/cart/${id}`}>Shopping Cart</Link>
+          <Link to="/cart">Shopping Cart</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>
