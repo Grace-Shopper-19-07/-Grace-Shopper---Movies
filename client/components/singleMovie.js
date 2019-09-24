@@ -31,6 +31,7 @@ class SingleMovie extends React.Component {
         <p>${price / 100}</p>
         <Link to="/movies">
           <button
+            type="submit"
             onClick={() => {
               if (this.props.user.id) {
                 this.props.addMovieThunk(movie)

@@ -23,6 +23,28 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.post('/checkout', async (req, res, next) => {
+  try {
+    const {email} = req.body
+    console.log(email)
+    const data = await User.create({email})
+    res.status(201).json(data)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/', async (req, res, next) => {
+  try {
+    await ProductOrder.destroy({
+      where: {orderId: req.body.orderId, movieId: req.body.movieId}
+    })
+    res.status(202).end()
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/', async (req, res, next) => {
   try {
     await ProductOrder.update(
@@ -37,17 +59,6 @@ router.put('/', async (req, res, next) => {
       }
     )
     res.status(204).end()
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.delete('/', async (req, res, next) => {
-  try {
-    await ProductOrder.destroy({
-      where: {orderId: req.body.orderId, movieId: req.body.movieId}
-    })
-    res.status(202).end()
   } catch (err) {
     next(err)
   }
