@@ -23,13 +23,12 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.post('/checkout', (req, res, next) => {
+router.post('/checkout', async (req, res, next) => {
   try {
     const {email} = req.body
     console.log(email)
-    // const data = await User.create({
-    //   email
-    // })
+    const data = await User.create({email})
+    res.status(201).json(data)
   } catch (err) {
     next(err)
   }

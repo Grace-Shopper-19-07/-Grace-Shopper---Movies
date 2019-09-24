@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {addGuestThunk} from '../store/guestReducer'
+import {addGuestThunk, guestCheckOutThunk} from '../store/guestReducer'
 
 class GuestCheckOut extends React.Component {
   constructor() {
@@ -40,7 +40,10 @@ class GuestCheckOut extends React.Component {
           <Link to="/postcheckout">
             <button
               type="submit"
-              onClick={() => this.props.addGuest(this.state.email)}
+              onClick={() => {
+                this.props.addGuest(this.state.email)
+                this.props.guestCheckOut(this.state.email)
+              }}
             >
               Submit
             </button>
@@ -55,6 +58,9 @@ const mapDispatch = dispatch => {
   return {
     addGuest: email => {
       dispatch(addGuestThunk(email))
+    },
+    guestCheckOut: email => {
+      dispatch(guestCheckOutThunk(email))
     }
   }
 }
