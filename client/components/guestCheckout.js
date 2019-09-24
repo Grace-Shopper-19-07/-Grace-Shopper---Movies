@@ -1,7 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {addGuestThunk, guestCheckOutThunk} from '../store/guestReducer'
+import {
+  addGuestThunk,
+  guestCheckOutThunk,
+  addMovieThunk
+} from '../store/guestReducer'
+import {deleteCart} from '../store/cartReducer'
 
 class GuestCheckOut extends React.Component {
   constructor() {
@@ -25,7 +30,7 @@ class GuestCheckOut extends React.Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log('guest', this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -42,6 +47,8 @@ class GuestCheckOut extends React.Component {
               onClick={() => {
                 this.props.addGuest(this.state.email)
                 this.props.guestCheckOut(this.state.email)
+                // this.props.addMovie(this.state.cart.movies)
+                this.props.deleteCart()
               }}
             >
               Submit
@@ -53,6 +60,12 @@ class GuestCheckOut extends React.Component {
   }
 }
 
+const mapState = state => {
+  return {
+    cart: state.cart.userCart
+  }
+}
+
 const mapDispatch = dispatch => {
   return {
     addGuest: email => {
@@ -60,8 +73,14 @@ const mapDispatch = dispatch => {
     },
     guestCheckOut: email => {
       dispatch(guestCheckOutThunk(email))
+    },
+    deleteCart: () => {
+      dispatch(deleteCart())
+    },
+    addMovie: movie => {
+      dispatch(addMovieThunk(movie))
     }
   }
 }
 
-export default connect(null, mapDispatch)(GuestCheckOut)
+export default connect(mapState, mapDispatch)(GuestCheckOut)

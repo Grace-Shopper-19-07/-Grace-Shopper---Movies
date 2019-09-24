@@ -28,10 +28,7 @@ router.post('/', async (req, res, next) => {
 router.post('/checkout', async (req, res, next) => {
   try {
     const {email} = req.body
-    const data = await Order.create(
-      {email: email, status: 'COMPLETE'},
-      {include: {model: Movie}}
-    )
+    const data = await Order.create({email: email, status: 'COMPLETE'})
     res.status(201).json(data)
   } catch (err) {
     next(err)
