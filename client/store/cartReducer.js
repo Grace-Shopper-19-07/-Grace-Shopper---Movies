@@ -11,6 +11,14 @@ const DELETE_CART = 'DELETE_CART'
 const ADD_GUEST_CART = 'ADD_GUEST_CART'
 const CHECK_CART_OUT = 'CHECK_CART_OUT'
 const ADD_MOVIE = 'ADD_MOVIE'
+const UPDATE_MOVIE = 'UPDATE_MOVIE'
+
+const movieToUpdate = movie => {
+  return {
+    type: UPDATE_MOVIE,
+    movie
+  }
+}
 
 const cartCheckedOut = () => {
   return {
@@ -90,6 +98,18 @@ export const addMovieThunk = movie => {
   return async dispatch => {
     await axios.post(`/api/cart/`, movie)
     dispatch(addMovie(movie))
+  }
+}
+
+export const updateMovieThunk = movie => {
+  console.log(' are we here ')
+  return async dispatch => {
+    await axios.put('/api/cart/', {
+      orderId: movie.ProductOrder.orderId,
+      movieId: movie.id,
+      quantity: movie.ProductOrder.quantity
+    })
+    dispatch(movieToUpdate(movie))
   }
 }
 
