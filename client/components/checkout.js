@@ -26,7 +26,10 @@ class Checkout extends React.Component {
               <img src={movie.image} />
               <p>{movie.name}</p>
               <p>${movie.price / 100}</p>
-              <button onClick={() => this.props.removeMovie(movie)}>
+              <button
+                type="submit"
+                onClick={() => this.props.removeMovie(movie)}
+              >
                 Remove from Cart
               </button>
             </div>
@@ -35,6 +38,7 @@ class Checkout extends React.Component {
 
           <Link to="/postcheckout">
             <button
+              type="submit"
               onClick={() => {
                 this.props.checkout(this.props.user.id)
                 this.props.renderCart()
