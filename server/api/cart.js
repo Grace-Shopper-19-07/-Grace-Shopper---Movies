@@ -1,10 +1,11 @@
 const router = require('express').Router()
 const {ProductOrder, User, Order, Movie} = require('../db/models')
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
+    console.log('REQ.USER', req.user.id)
     const [order, wasCreated] = await Order.findOrCreate({
-      where: {userId: req.params.userId, status: 'PENDING'},
+      where: {userId: req.user.id, status: 'PENDING'},
       include: {model: Movie}
     })
     res.json(order)
@@ -15,6 +16,7 @@ router.get('/:userId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    console.log(req.body)
     const {movieId, orderId, quantity} = req.body
     const data = await ProductOrder.create({quantity, movieId, orderId})
     res.status(201).json(data)
@@ -64,7 +66,20 @@ router.put('/', async (req, res, next) => {
   }
 })
 
+router.delete('/', async (req, res, next) => {
+  try {
+    console.log('router.delete')
+    await ProductOrder.destroy({
+      where: {orderId: req.body.orderId, movieId: req.body.movieId}
+    })
+    res.status(202).end()
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/checkout', async (req, res, next) => {
+  console.log('CHECKOUT', req.body)
   try {
     await Order.update(
       {
