@@ -69,9 +69,8 @@ export const checkOutThunk = userId => {
 
 export const getUserCartById = () => {
   return async dispatch => {
-    console.log('GETUSERCARTBYID')
-    const user = await axios.get('/auth/me')
-    const {data} = await axios.get(`/api/cart/`)
+    // const user = await axios.get('/auth/me')
+    const {data} = await axios.get(`/api/cart`)
     dispatch(gotLoggedInUserCart(data))
   }
 }
@@ -111,7 +110,6 @@ export const removeMovieThunk = movie => {
         movieId: movie.id
       }
     })
-    console.log('made it', movie)
     dispatch(removeMovie(movie))
   }
 }
