@@ -16,6 +16,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    console.log(req.body)
     const {movieId, orderId, quantity} = req.body
     const data = await ProductOrder.create({quantity, movieId, orderId})
     res.status(201).json(data)
@@ -45,6 +46,7 @@ router.put('/', async (req, res, next) => {
 
 router.delete('/', async (req, res, next) => {
   try {
+    console.log('router.delete')
     await ProductOrder.destroy({
       where: {orderId: req.body.orderId, movieId: req.body.movieId}
     })
@@ -55,6 +57,7 @@ router.delete('/', async (req, res, next) => {
 })
 
 router.put('/checkout', async (req, res, next) => {
+  console.log('CHECKOUT', req.body)
   try {
     await Order.update(
       {

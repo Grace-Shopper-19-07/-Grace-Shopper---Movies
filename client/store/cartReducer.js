@@ -82,13 +82,16 @@ export const updateCartThunk = updatedQuantity => {
   }
 }
 
+//do we need this?
 export const deleteCart = () => {
+  console.log('DELETECART')
   return dispatch => {
     dispatch(deletedCart())
   }
 }
 
 export const addGuestCartThunk = cart => {
+  console.log('ADDGUESTCART', cart)
   return dispatch => {
     dispatch(addGuestCart(cart))
   }
@@ -103,13 +106,14 @@ export const addMovieThunk = movie => {
 
 export const removeMovieThunk = movie => {
   return async dispatch => {
-    const user = await axios.get('/auth/me')
-    await axios.delete(`/api/cart/`, {
-      data: {
-        orderId: movie.ProductOrder.orderId,
-        movieId: movie.id
-      }
-    })
+    if (movie.ProductOrder) {
+      await axios.delete(`/api/cart/`, {
+        data: {
+          orderId: movie.ProductOrder.orderId,
+          movieId: movie.id
+        }
+      })
+    }
     dispatch(removeMovie(movie))
   }
 }
