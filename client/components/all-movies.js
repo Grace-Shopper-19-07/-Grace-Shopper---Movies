@@ -11,28 +11,6 @@ class AllMovies extends React.Component {
     return (
       <div>
         <h1>MOVIES</h1>
-        <div className="filter">
-          <label>
-            <input name="genre" type="checkbox" />
-            Action
-          </label>
-          <label>
-            <input name="genre" type="checkbox" />
-            Comedy
-          </label>
-          <label>
-            <input name="genre" type="checkbox" />
-            Drama
-          </label>
-          <label>
-            <input name="genre" type="checkbox" />
-            Romantic
-          </label>
-          <label>
-            <input name="genre" type="checkbox" />
-            Marvel
-          </label>
-        </div>
         <div className="allmovies">
           {this.props.movies.map(movie => (
             <div key={movie.id}>

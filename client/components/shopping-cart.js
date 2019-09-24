@@ -2,40 +2,43 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {logout} from '../store'
-import {
-  getUserCartById,
-  updateCartThunk,
-  deleteCart,
-  removeMovieThunk
-} from '../store/cartReducer'
+import {getUserCartById, removeMovieThunk} from '../store/cartReducer'
 
 class ShoppingCart extends React.Component {
   componentDidMount() {
-    this.props.renderCart()
+    if (this.props.user.id) this.props.renderCart()
   }
-
   render() {
+    console.log(this.props)
     if (this.props.cart.movies) {
       return (
         <div className="cart">
           <div>
-            {this.props.cart.movies.map(movie => (
-              <div key={movie.id}>
+            {this.props.cart.movies.map((movie, idx) => (
+              <div key={idx}>
                 <img src={movie.image} />
                 <p>{movie.name}</p>
                 <p>${movie.price / 100}</p>
-                <button onClick={() => this.props.removeMovie(movie)}>
+                <button
+                  type="submit"
+                  onClick={() => this.props.removeMovie(movie)}
+                >
                   Remove from Cart
                 </button>
               </div>
             ))}
             <Link to="/movies">
-              <button>Back to Shopping</button>
+              <button type="submit">Back to Shopping</button>
             </Link>
-            <Link to="/checkout">
-              <button>Proceed to Checkout</button>
-            </Link>
+            {Object.keys(this.props.user).length > 1 ? (
+              <Link to="/checkout">
+                <button type="submit">Proceed to Checkout</button>
+              </Link>
+            ) : (
+              <Link to="/guestcheckout">
+                <button type="submit">Proceed to Checkout</button>
+              </Link>
+            )}
           </div>
         </div>
       )
@@ -61,7 +64,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    renderCart: id => {
+    renderCart: () => {
       dispatch(getUserCartById())
     },
     removeMovie: movie => {

@@ -1,3 +1,4 @@
+const Users = require('./secrets')
 const db = require('./server/db')
 // const {green, red} = require('chalk')
 const {Movie, User, Order, ProductOrder} = require('./server/db/models')
@@ -49,24 +50,7 @@ const movies = [
   }
 ]
 
-const users = [
-  {
-    email: 'ai@gmail.com',
-    password: '123'
-  },
-  {
-    email: 'ethan@gmail.com',
-    password: '345'
-  },
-  {
-    email: 'jon@gmail.com',
-    password: '567'
-  },
-  {
-    email: 'mike@gmail.com',
-    password: '789'
-  }
-]
+const users = Users
 
 const orders = [
   {
