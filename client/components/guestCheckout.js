@@ -19,7 +19,6 @@ class GuestCheckOut extends React.Component {
 
   handleSubmit = evt => {
     evt.preventDefault()
-    // this.props.addGuest(this.state.email)
     this.setState({
       email: ''
     })
