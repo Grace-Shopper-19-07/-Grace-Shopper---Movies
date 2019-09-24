@@ -9,7 +9,7 @@ import {getUserCartById} from '../store/cartReducer'
 // export const UserHome = props => {
 export class UserHome extends React.Component {
   componentDidMount() {
-    // this.props.renderCart()
+    this.props.renderCart()
   }
 
   render() {
