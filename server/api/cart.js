@@ -92,10 +92,10 @@ router.put('/checkout', async (req, res, next) => {
         }
       }
     )
-    await Order.create({
-      status: 'PENDING',
-      userId: req.body.userId
-    })
+    // await Order.create({
+    //   status: 'PENDING',
+    //   userId: req.body.userId
+    // })
     res.status(204).end()
   } catch (err) {
     next(err)
