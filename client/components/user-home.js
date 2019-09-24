@@ -34,7 +34,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    renderCart: id => {
+    renderCart: () => {
       dispatch(getUserCartById())
     }
   }
