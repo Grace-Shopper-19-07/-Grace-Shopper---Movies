@@ -108,7 +108,8 @@ const movies = [
     genre: 'Drama',
     year: 1993,
     price: 1306,
-    image: 'https://www.vermontmoviestore.com/products/a-bronx-tale',
+    image:
+      'https://cdn.shopify.com/s/files/1/0295/1149/products/a-bronx-tale_2048x2048.jpg?v=1404920640',
     description:
       'As he grows into a teenager on the streets of the Bronx in the socially turbulent 1960s, Calogero (Lillo Brancato) gets taken under the wing of neighborhood mobster Sonny (Chazz Palminteri). Sonny initiates the boy into the ways of gangland life, in direct conflict with his straight-arrow bus driver father (Robert De Niro). But when Calogero falls for his African-American classmate, Jane (Taral Hicks), the repercussions threaten the entire neighborhood.',
     inventory: 10
