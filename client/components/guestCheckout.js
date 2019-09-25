@@ -30,7 +30,6 @@ class GuestCheckOut extends React.Component {
   }
 
   render() {
-    console.log('guest', this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

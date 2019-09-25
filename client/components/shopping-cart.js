@@ -9,7 +9,6 @@ class ShoppingCart extends React.Component {
     if (this.props.user.id) this.props.renderCart()
   }
   render() {
-    console.log('SHOPPING CART', this.props.cart.movies.length)
     if (this.props.cart.movies) {
       return (
         <div className="cart">
@@ -21,6 +20,7 @@ class ShoppingCart extends React.Component {
                 <p>${movie.price / 100}</p>
                 <button
                   type="submit"
+                  className="remove"
                   onClick={() => this.props.removeMovie(movie)}
                 >
                   Remove

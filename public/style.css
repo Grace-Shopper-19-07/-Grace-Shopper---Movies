@@ -22,24 +22,20 @@ form div {
 }
 
 img {
-  max-width: 100px;
-  max-height: 150px;
-  margin: 20px;
+  width: 125px;
+  height: 187.5px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
 }
 
 .movie {
   overflow-wrap: break-word;
   max-width: 100px;
   text-align: center;
-  margin-left: 20px;
-  margin-right: 20px;
+  /* margin-left: 20px;
+  margin-right: 20px; */
   color: white;
-}
-
-.allmovies {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 }
 
 .navbar {
@@ -66,12 +62,15 @@ img {
   margin-bottom: 5%;
   color: white;
 }
-.allmovies,
-.cartMovie {
+
+.allmovies {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 50px;
 }
+
 .filter {
   display: flex;
   flex-direction: row;
@@ -93,6 +92,32 @@ button {
   background-color: #ffec64;
   border-radius: 6px;
   border: 1px solid #ffaa22;
+  display: inline-block;
+  cursor: pointer;
+  color: #333333;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  /* padding:6px 24px; */
+  text-shadow: 0px 1px 0px #ffee66;
+  height: 35px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 40px;
+}
+
+.singleMovie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.remove {
+  box-shadow: inset 0px 1px 0px 0px white;
+  background: linear-gradient(to bottom, gray 5%, white 100%);
+  background-color: gray;
+  border-radius: 6px;
+  border: 1px solid black;
   display: inline-block;
   cursor: pointer;
   color: #333333;

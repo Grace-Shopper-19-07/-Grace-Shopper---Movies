@@ -13,7 +13,7 @@ class AllMovies extends React.Component {
         <h1>MOVIES</h1>
         <div className="allmovies">
           {this.props.movies.map(movie => (
-            <div key={movie.id}>
+            <div key={movie.id} className="singleMovie">
               <img src={movie.image} />
               <br />
               <p className="movie">

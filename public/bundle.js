@@ -314,7 +314,8 @@ function (_React$Component) {
         className: "allmovies"
       }, this.props.movies.map(function (movie) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          key: movie.id
+          key: movie.id,
+          className: "singleMovie"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: movie.image
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -758,7 +759,6 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      console.log('guest', this.props);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -1061,8 +1061,6 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      console.log('SHOPPING CART', this.props.cart.movies.length);
-
       if (this.props.cart.movies) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "cart"
@@ -1074,6 +1072,7 @@ function (_React$Component) {
             src: movie.image
           }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, movie.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "$", movie.price / 100), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "submit",
+            className: "remove",
             onClick: function onClick() {
               return _this.props.removeMovie(movie);
             }
@@ -1712,13 +1711,11 @@ var updateCartThunk = function updateCartThunk(updatedQuantity) {
 }; //do we need this?
 
 var deleteCart = function deleteCart() {
-  console.log('DELETECART');
   return function (dispatch) {
     dispatch(deletedCart());
   };
 };
 var addGuestCartThunk = function addGuestCartThunk(cart) {
-  console.log('ADDGUESTCART', cart);
   return function (dispatch) {
     dispatch(addGuestCart(cart));
   };
