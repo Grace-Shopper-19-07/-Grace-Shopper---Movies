@@ -87,7 +87,7 @@ const movies = [
     year: 1998,
     price: 699,
     image:
-      'https://i5.walmartimages.com/asr/32400578-e4fb-488c-ae7d-b89a40170d08_1.83471cf5d611a8c23b2fc8526c557b02.jpeg?odnHeight=450&odnWidth=450&odnBg=FFFFFF',
+      'https://musicart.xboxlive.com/7/27d71100-0000-0000-0000-000000000002/504/image.jpg?w=1920&h=1080',
     description:
       "When a member of their crew gets arrested for killing a New York City police horse by feeding it junk food, three slackin' stoners are forced to get off their butts and raise bail by selling pot stolen from a pharmaceutical lab. It's a risky plan but, hey, these are stand-up guys who would do anything to help out a friend in need.",
     inventory: 10
@@ -108,7 +108,8 @@ const movies = [
     genre: 'Drama',
     year: 1993,
     price: 1306,
-    image: 'https://www.vermontmoviestore.com/products/a-bronx-tale',
+    image:
+      'https://images-na.ssl-images-amazon.com/images/I/91BdILZCvYL._RI_.jpg',
     description:
       'As he grows into a teenager on the streets of the Bronx in the socially turbulent 1960s, Calogero (Lillo Brancato) gets taken under the wing of neighborhood mobster Sonny (Chazz Palminteri). Sonny initiates the boy into the ways of gangland life, in direct conflict with his straight-arrow bus driver father (Robert De Niro). But when Calogero falls for his African-American classmate, Jane (Taral Hicks), the repercussions threaten the entire neighborhood.',
     inventory: 10

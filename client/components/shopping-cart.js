@@ -9,21 +9,21 @@ class ShoppingCart extends React.Component {
     if (this.props.user.id) this.props.renderCart()
   }
   render() {
-    console.log(this.props)
     if (this.props.cart.movies) {
       return (
         <div className="cart">
           <div>
             {this.props.cart.movies.map((movie, idx) => (
-              <div key={idx}>
+              <div key={idx} className="cartMovie">
                 <img src={movie.image} />
                 <p>{movie.name}</p>
                 <p>${movie.price / 100}</p>
                 <button
                   type="submit"
+                  className="remove"
                   onClick={() => this.props.removeMovie(movie)}
                 >
-                  Remove from Cart
+                  Remove
                 </button>
               </div>
             ))}

@@ -22,7 +22,7 @@ class Checkout extends React.Component {
         <div className="cart">
           <p>Items In Your Cart:</p>
           {this.props.cart.movies.map(movie => (
-            <div key={movie.id}>
+            <div key={movie.id} className="cartMovie">
               <img src={movie.image} />
               <p>{movie.name}</p>
               <p>${movie.price / 100}</p>

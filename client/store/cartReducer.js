@@ -86,14 +86,12 @@ export const updateCartThunk = updatedQuantity => {
 
 //do we need this?
 export const deleteCart = () => {
-  console.log('DELETECART')
   return dispatch => {
     dispatch(deletedCart())
   }
 }
 
 export const addGuestCartThunk = cart => {
-  console.log('ADDGUESTCART', cart)
   return dispatch => {
     dispatch(addGuestCart(cart))
   }
