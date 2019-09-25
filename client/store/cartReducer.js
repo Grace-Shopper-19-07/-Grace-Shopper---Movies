@@ -62,25 +62,36 @@ const deletedCart = () => {
 
 export const checkOutThunk = userId => {
   return async dispatch => {
-    await axios.put(`/api/cart/checkout`, {userId: userId})
-    dispatch(cartCheckedOut())
-    const {data} = await axios.get(`/api/cart`)
-    dispatch(gotLoggedInUserCart(data))
+    try {
+      await axios.put(`/api/cart/checkout`, {userId: userId})
+      dispatch(cartCheckedOut())
+      const {data} = await axios.get(`/api/cart`)
+      dispatch(gotLoggedInUserCart(data))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
 export const getUserCartById = () => {
   return async dispatch => {
-    // const user = await axios.get('/auth/me')
-    const {data} = await axios.get(`/api/cart`)
-    dispatch(gotLoggedInUserCart(data))
+    try {
+      const {data} = await axios.get(`/api/cart`)
+      dispatch(gotLoggedInUserCart(data))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
 export const updateCartThunk = updatedQuantity => {
   return async dispatch => {
-    const {data} = await axios.put('/api/cart', updatedQuantity)
-    dispatch(gotUpdatedCart(updatedQuantity))
+    try {
+      const {data} = await axios.put('/api/cart', updatedQuantity)
+      dispatch(gotUpdatedCart(updatedQuantity))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
@@ -99,22 +110,30 @@ export const addGuestCartThunk = cart => {
 
 export const addMovieThunk = movie => {
   return async dispatch => {
-    await axios.post(`/api/cart/`, movie)
-    dispatch(addMovie(movie))
+    try {
+      await axios.post(`/api/cart/`, movie)
+      dispatch(addMovie(movie))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
 export const removeMovieThunk = movie => {
   return async dispatch => {
-    if (movie.ProductOrder) {
-      await axios.delete(`/api/cart/`, {
-        data: {
-          orderId: movie.ProductOrder.orderId,
-          movieId: movie.id
-        }
-      })
+    try {
+      if (movie.ProductOrder) {
+        await axios.delete(`/api/cart/`, {
+          data: {
+            orderId: movie.ProductOrder.orderId,
+            movieId: movie.id
+          }
+        })
+      }
+      dispatch(removeMovie(movie))
+    } catch (err) {
+      console.error(err)
     }
-    dispatch(removeMovie(movie))
   }
 }
 

@@ -25,7 +25,11 @@ export const addGuestThunk = email => {
 
 export const guestCheckOutThunk = email => {
   return async dispatch => {
-    await axios.post('api/cart/checkout', {email: email})
+    try {
+      await axios.post('api/cart/checkout', {email: email})
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
